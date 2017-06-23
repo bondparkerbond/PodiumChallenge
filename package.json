@@ -4,7 +4,9 @@
   "description": "Scrape reviews and return most positive",
   "main": "server.js",
   "scripts": {
-    "test": "console.log(\"Express test command\");"
+    "test": "console.log(\"Express test command\");",
+    "start": "node --harmony server.js",
+    "scrape" "node --harmony scraper.js"
   },
   "keywords": [],
   "author": "Parker Bond",

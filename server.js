@@ -1,7 +1,9 @@
-var express = require('express');
-var ReactEngine = require('react-engine');
+require('node-jsx').install();
 
+var express = require('express');
+var renderer = require('react-engine');
 var app = express();
+var engine = renderer.server.create();
 
 var sentiment = require('sentiment');
 var json = require('./results.json');
@@ -39,5 +41,21 @@ console.log({ 1.: sentimental[0] });
 console.log({ 2.: sentimental[1] });
 console.log({ 3.: sentimental[2] });
 
+app.engine('.jsx', engine);
+app.set('views', __dirname + '/public/views');
+app.set('view engine', 'jsx');
+app.set('view', renderer.expressView);
 
+app.use(express.static(__dirname + '/public'));
 
+var index = function(req, res){
+  res.render('index', {
+    title: req.params.msg || 'HOME'
+  })
+}
+
+app.get('', index);
+app.get('/:msg', index);
+
+app.listen(4000);
+console.log('Now serving on localhost:4000');
