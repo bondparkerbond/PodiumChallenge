@@ -8,45 +8,42 @@ var app = express();
 var engine = renderer.server.create();
 
 var sentiment = require('sentiment');
-// var json = require('./results.json');
+var json = require('./results.json');
 
-// var string = JSON.stringify(json);
-// var parsed = JSON.parse(string);
-// console.log({ TotalReviewsScraped: parsed.length });
+var string = JSON.stringify(json);
+var parsed = JSON.parse(string);
+console.log({ TotalReviewsScraped: parsed.length });
 
-// function filterScores(object) {
-//   if (!!object.css) {
-//     return object;
-//   }
-// }
-// var filtered = parsed.filter(filterScores)
+function filterScores(object) {
+  if (!!object.css) {
+    return object;
+  }
+}
+var filtered = parsed.filter(filterScores)
 
-// function sentimentize(object) {
-//   var sentimentInfo = sentiment(object.body);
-//   var toReturn = {
-//     score: sentimentInfo.score,
-//     comparative: sentimentInfo.comparative,
-//     name: object.name,
-//   }
-//   return toReturn;
-// }
-// console.log({ withPerfectScores: filtered.length });
+function sentimentize(object) {
+  var sentimentInfo = sentiment(object.body);
+  var toReturn = {
+    score: sentimentInfo.score,
+    comparative: sentimentInfo.comparative,
+    name: object.name,
+  }
+  return toReturn;
+}
+console.log({ withPerfectScores: filtered.length });
 
-// var sentimental = filtered.map(sentimentize);
+var sentimental = filtered.map(sentimentize);
 
-// var sortedSentiment = sentimental.sort(function(a, b) {
-//   return parseFloat(b.score) - parseFloat(a.score) || parseFloat(b.comparative) - parseFloat(a.comparative);
-// });
+var sortedSentiment = sentimental.sort(function(a, b) {
+  return parseFloat(b.score) - parseFloat(a.score) || parseFloat(b.comparative) - parseFloat(a.comparative);
+});
 
-// console.log('Top three most positive comments are: ');
-// console.log({ 1.: sentimental[0] });
-// console.log({ 2.: sentimental[1] });
-// console.log({ 3.: sentimental[2] });
-// console.log({ 4.: sentimental[3] });
+console.log('Top three most positive comments are: ');
+console.log({ 1.: sentimental[0] });
+console.log({ 2.: sentimental[1] });
+console.log({ 3.: sentimental[2] });
 
-// var topTen = sortedSentiment.slice(0,10);
-
-// console.log({ topTen });
+var topTen = sortedSentiment.slice(0,10);
 
 app.engine('.jsx', engine);
 app.set('views', __dirname + '/views');
@@ -55,13 +52,12 @@ app.set('view', renderer.expressView);
 
 var index = function(req, res){
   res.render('index', {
-    title: req.params.msg || 'Top 3 reveiws',
-    reviews: ''
+    title: 'Top 3 reveiws',
+    reviews: {topTen}
   });
 }
 
 app.get('', index);
-app.get('/:msg', index);
 
 app.listen(4000);
 console.log('Now serving on localhost:4000');
