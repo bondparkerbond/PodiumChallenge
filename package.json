@@ -1,0 +1,21 @@
+{
+  "name": "podium_scraper",
+  "version": "1.0.0",
+  "description": "Scrape reviews and return most positive",
+  "main": "server.js",
+  "scripts": {
+    "test": "console.log(\"Express test command\");"
+  },
+  "keywords": [],
+  "author": "Parker Bond",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "node-jsx": "^0.13.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-engine": "^4.3.0",
+    "sentiment": "^4.0.0",
+    "x-ray": "^2.3.2"
+  }
+}
