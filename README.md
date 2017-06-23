@@ -8,7 +8,7 @@ To run this project do the following steps
   (note: you should have a results.json after running this that is used in the next step)
 4. Return the top 3 results by running `node server.js`
    Note: you can also run this with nodemon `nodemon server.js`
-5. View results on localhost:4000 or in the terminal.
+5. View results on localhost:3000 or in the terminal.
 
 Relevant libraries:
  `x-ray`: is used to scrape the website in questions

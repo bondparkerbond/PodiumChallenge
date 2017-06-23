@@ -7,18 +7,18 @@ var renderer = require('react-engine');
 var app = express();
 var engine = renderer.server.create();
 
-var sentiment = require('sentiment');
-var json = require('./results.json');
+var sentiment = require('sentiment'); // runs sentiment analysis on reviews
+var json = require('./results.json'); // created by running scraper.js script
 
 var string = JSON.stringify(json);
 var parsed = JSON.parse(string);
-console.log({ TotalReviewsScraped: parsed.length });
 
 function filterScores(object) {
   if (!!object.css) {
     return object;
   }
 }
+// filter out reviews that didn't get a perfect 50 score
 var filtered = parsed.filter(filterScores)
 
 function sentimentize(object) {
@@ -30,19 +30,18 @@ function sentimentize(object) {
   }
   return toReturn;
 }
-console.log({ withPerfectScores: filtered.length });
-
+// run sentimet analysis on remaining results
 var sentimental = filtered.map(sentimentize);
-
+// sort results primarily on sentiment score and secondarily on comparative score
 var sortedSentiment = sentimental.sort(function(a, b) {
   return parseFloat(b.score) - parseFloat(a.score) || parseFloat(b.comparative) - parseFloat(a.comparative);
 });
-
+// Log top 3 results to the console
 console.log('Top three most positive comments are: ');
 console.log({ 1.: sentimental[0] });
 console.log({ 2.: sentimental[1] });
 console.log({ 3.: sentimental[2] });
-
+// return top 10 results for react to use in case I ever decide to not just hard code top 3.
 var topTen = sortedSentiment.slice(0,10);
 
 app.engine('.jsx', engine);
@@ -59,5 +58,5 @@ var index = function(req, res){
 
 app.get('', index);
 
-app.listen(4000);
-console.log('Now serving on localhost:4000');
+app.listen(3000);
+console.log('Now serving on localhost:3000');
