@@ -1,4 +1,4 @@
-import React from 'react';
+var React = require('react');
 
 const Page = (props) => (
   <html>
@@ -11,4 +11,4 @@ const Page = (props) => (
   </html>
 );
 
-export default Page;
+module.exports = Page;

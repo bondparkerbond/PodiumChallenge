@@ -1,5 +1,5 @@
-import React from 'react';
-import Page from './page';
+var React = require('react');
+var Page = require('./page.jsx');
 
 const Index = (props) => (
   <Page {...props}>
@@ -7,4 +7,4 @@ const Index = (props) => (
   </Page>
 )
 
-export default Index;
+module.exports = Index;

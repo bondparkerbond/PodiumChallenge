@@ -1,3 +1,5 @@
+'use strict';
+
 require('node-jsx').install();
 
 var express = require('express');
@@ -42,11 +44,9 @@ console.log({ 2.: sentimental[1] });
 console.log({ 3.: sentimental[2] });
 
 app.engine('.jsx', engine);
-app.set('views', __dirname + '/public/views');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.set('view', renderer.expressView);
-
-app.use(express.static(__dirname + '/public'));
 
 var index = function(req, res){
   res.render('index', {
