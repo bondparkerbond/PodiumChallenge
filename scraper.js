@@ -5,7 +5,7 @@ xray('http://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-
   [{
     name: '.italic.font-18.black', //reviewer name
     body: '.review-content', // review text
-    css: '.rating-50 @class', // used to know if this is a perfect 5 review or not
+    css: '.rating-50 @class', // used to know if this is a perfect 5 star review or not
   }]
 )
   .paginate('a[rel="next"]:last-child@href')

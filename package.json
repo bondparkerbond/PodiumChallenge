@@ -1,7 +1,7 @@
 {
   "name": "podium_scraper",
   "version": "1.0.0",
-  "description": "Scrape reviews and return most positive",
+  "description": "Scrape reviews and return 3 most positive",
   "main": "server.js",
   "scripts": {
     "test": "console.log(\"Express test command\");",

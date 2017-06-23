@@ -9,7 +9,7 @@ var engine = renderer.server.create();
 
 var sentiment = require('sentiment'); // runs sentiment analysis on reviews
 var json = require('./results.json'); // created by running scraper.js script
-
+// this will break if no results.json is present
 var string = JSON.stringify(json);
 var parsed = JSON.parse(string);
 
